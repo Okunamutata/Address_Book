@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Record",
+            "request": "launch",
+            "mainClass": "Record",
+            "projectName": "Address_Book_c3395a17"
+        }
+    ]
+}
