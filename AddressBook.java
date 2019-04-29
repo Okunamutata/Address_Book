@@ -76,6 +76,10 @@ public class AddressBook {
                 break;
 
                 case "DELETE":
+                    System.out.println("Enter your password to proceed");
+                    in = input.nextLine(); //should be passwrds entry
+                    //verPassword, if true process, else throw mismatch error
+
                     System.out.println("Enter the foillowing parameter\n" + 
                     "<name>");
                     in =  verInput(input.nextLine());
@@ -88,6 +92,10 @@ public class AddressBook {
                     break;
                 
                 case "SET":
+                     System.out.println("Enter your password to proceed");
+                    in = input.nextLine(); //should be passwrds entry
+                      //verPassword, if true process, else throw mismatch error
+
                     System.out.println("Enter the foillowing parameter\n" + 
                                     " <name>");
                     in =  verInput(input.nextLine());
