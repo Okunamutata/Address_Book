@@ -24,7 +24,13 @@ public class AddressBook {
         if(temp.length() > 6){  throw new IllegalArgumentException("Invalid command"); }
         return temp;
     }
-
+    public boolean verPass(String pass){
+        ///verify the password,
+        //run hash on pass
+        //if it mathces the previously hashed password, that is owned by the user
+        // pass == true
+        return true;
+    }
     public static String verNum(String num){
         String temp = null;
         char start ='<', end = '>';
