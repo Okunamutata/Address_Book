@@ -51,7 +51,7 @@ public class AddressBook {
     
 
     public static void main(String[] args){
-        Boolean runAgian = true;
+        Boolean runAgain = true;
         String in = null;
         Scanner input = new Scanner(System.in);// remember to close scanner
         System.out.println("*******************************\n" +
@@ -67,16 +67,16 @@ public class AddressBook {
             in = verInput(input.nextLine()); // command input
             switch (in) {
                 case "ADD":
-                    System.out.println("Enter the foillowing parameter\n" + 
+                    System.out.println("Enter the following parameter\n" + 
                                     " <name>");
                     in =  verInput(input.nextLine());
-                    System.out.println("Enter the foillowing parameter\n" + 
+                    System.out.println("Enter the following parameter\n" + 
                                     " <zip_code>");
                     in =  verInput(input.nextLine());
-                    System.out.println("Enter the foillowing parameter\n" + 
+                    System.out.println("Enter the following parameter\n" + 
                                     " <email_address>");
                     in =  verInput(input.nextLine());
-                    System.out.println("Enter the foillowing parameter\n" + 
+                    System.out.println("Enter the following parameter\n" + 
                                     " <phone_number>");
                     in =  verNum(input.nextLine());  
                 break;
@@ -86,13 +86,13 @@ public class AddressBook {
                     in = input.nextLine(); //should be passwrds entry
                     //verPassword, if true process, else throw mismatch error
 
-                    System.out.println("Enter the foillowing parameter\n" + 
+                    System.out.println("Enter the following parameter\n" + 
                     "<name>");
                     in =  verInput(input.nextLine());
                     break;
                 
                 case "GET":
-                    System.out.println("Enter the foillowing parameter\n" + 
+                    System.out.println("Enter the following parameter\n" + 
                     "<name>");
                     in =  verInput(input.nextLine());
                     break;
@@ -102,16 +102,16 @@ public class AddressBook {
                     in = input.nextLine(); //should be passwrds entry
                       //verPassword, if true process, else throw mismatch error
 
-                    System.out.println("Enter the foillowing parameter\n" + 
+                    System.out.println("Enter the following parameter\n" + 
                                     " <name>");
                     in =  verInput(input.nextLine());
-                    System.out.println("Enter the foillowing parameter\n" + 
+                    System.out.println("Enter the following parameter\n" + 
                                     " <zip_code>");
                     in =  verInput(input.nextLine());
-                    System.out.println("Enter the foillowing parameter\n" + 
+                    System.out.println("Enter the following parameter\n" + 
                                     " <email_address>");
                     in =  verInput(input.nextLine());  
-                    System.out.println("Enter the foillowing parameter\n" + 
+                    System.out.println("Enter the following parameter\n" + 
                                     " <phone_number>");
                     in =  verNum(input.nextLine());     
                 default:
@@ -120,14 +120,14 @@ public class AddressBook {
                 
                 System.out.println("Do you wish to run again, enter yes or no");
                 in = input.nextLine();
-                if(in.equalsIgnoreCase("yes")){runAgian = true; break;}
-                else{ runAgian = false; break;}
+                if(in.equalsIgnoreCase("yes")){runAgain = true; break;}
+                else{ runAgain = false; break;}
             }            
             catch (Exception e) {
                 System.out.println("incorrect input");
                 break;
             }
-          }while(runAgian == true);
+          }while(runAgain == true);
           input.close();
           System.exit(0);
             
