@@ -21,8 +21,8 @@ public class HomePage {
 
                  			"*******************************");
 		 
-		 System.out.println("If you want to Sign up enter (1)\n"
-		 		+ "If you want to sign in enter (2)\n");
+		 System.out.println("If you want to Sign Up enter (1)\n"
+		 		+ "If you want to Sign In enter (2)\n");
 		 input = cScanner.nextInt();
 		 switch(input)
 		 {
