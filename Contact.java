@@ -1,3 +1,4 @@
+
 public class Contact {
 	protected String name;
 	protected int zipCode;
