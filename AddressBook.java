@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class AddressBook {
 
     /*
-    *   Method to verify command/ parameter input 
+    *   Method to verify command/parameter input 
     *
     */
     public static String verInput(String command){
@@ -130,7 +130,5 @@ public class AddressBook {
           }while(runAgain == true);
           input.close();
           System.exit(0);
-            
-
     }
 }
