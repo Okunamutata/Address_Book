@@ -11,6 +11,7 @@ public class HomePage {
 		 ArrayList<NewAccount> signedUpAccs = new ArrayList<>();  // the list of accounts
 		 String iD, pass1, pass2;
 		 NewAccount newAcc;
+		 AddressBook newAddress;
 		 Scanner cScanner = new Scanner(System.in);
 		 
 		 
@@ -48,12 +49,31 @@ public class HomePage {
 		 
 		 
 		 case 2: 
-			
-			 // This a log In page
+			// This a log In page
 			 // ask for their id & pass and then look up the accounts in data base if existed 
 			 // check if user existed 
 			 // every user have only access to their address book which they can edit delete add 
 			 // here call the addressBook class with their unique id
+			 String password,userID;
+			 System.out.println("*******************************" +
+          						"LOG IN PAGE" + 
+
+          						"*******************************");
+			 
+			 System.out.println("Please enter your iD \n");
+			 userID = cScanner.nextLine();
+			 System.out.println("Please enter your password \n");
+			 password = cScanner.nextLine();
+			 
+			
+				 for (int i = 0; i < signedUpAccs.size(); i++)
+				 
+				{
+						if(signedUpAccs.get(i).getPassword() ==  password && signedUpAccs.get(i).getiD() == userID)
+							signedUpAccs.get(i).setContacts(signedUpAccs.get(i).getContacts().runAB(signedUpAccs.get(i).getContacts()));
+						
+						// runAB should return the new addressBook edited then sets the addressBook object in the user object
+				}
 			 
 			 
 		 break;
@@ -62,7 +82,7 @@ public class HomePage {
 		 }
 		 
 		 }while(input >= 1 && input <= 2);
-		 
+		 System.exit(0);
 	}
 
 }

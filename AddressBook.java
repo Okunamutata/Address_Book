@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 
 public class AddressBook {
-    ArrayList<Contact> contactList;
+    protected ArrayList<Contact> contactList;
     public AddressBook(){
         contactList = new ArrayList<>();
 
@@ -14,7 +14,7 @@ public void add(String name, int zipCode, String email, int phoneNumber ){
     contactList.add(newCon);
 }
 
-public void delete(String name ){
+public  void delete(String name ){
     for(Contact e : contactList){
         if(e.name == name){
             contactList.remove(e);
@@ -26,8 +26,10 @@ public void delete(String name ){
    
 }
 
-public void set( String name, int zipCode, String email, int phoneNumber ){
-    for(Contact e : contactList){
+public void set( String name, int zipCode, String email, int phoneNumber )
+{
+    for(Contact e : contactList)
+    {
         if(e.name == name){
            e.name  = name;
             e.zipCode  = zipCode;
@@ -40,9 +42,11 @@ public void set( String name, int zipCode, String email, int phoneNumber ){
     }
 }
 
-public void get(String name){
+public void get(String name)
+{
     for(Contact e : contactList){
-        if(e.name == name){
+        if(e.name == name)
+        {
             System.out.println("Contact name: " + e.name + "\n"+
                                 "Zip Code: " + e.zipCode + "\n"+ 
                                 "Email: "   + e.email + "\n"+
@@ -95,16 +99,17 @@ public void get(String name){
     */
     
 
-    public  void runAB(String[] args){
+    public AddressBook runAB(AddressBook userBook){
      String name;
 	 int zipCode;
 	 String email;
 	 int phoneNumber;
+	 AddressBook temp = userBook;
         Boolean runAgian = true;
         String in = null;
         Scanner input = new Scanner(System.in);// remember to close scanner
         System.out.println("*******************************\n" +
-                            "Welcome to the Address Book\n" + 
+                            "Welcome to your Address Book\n" + 
        
                             "****************************");
         do{
@@ -116,38 +121,38 @@ public void get(String name){
             in = verInput(input.nextLine()); // command input
             switch (in) {
                 case "ADD":
-                    System.out.println("Enter the foillowing parameter\n" + 
+                    System.out.println("Enter the following parameter\n" + 
                                     " <name>");
                     name =  verInput(input.nextLine());
-                    System.out.println("Enter the foillowing parameter\n" + 
+                    System.out.println("Enter the following parameter\n" + 
                                     " <zip_code>");
                     zipCode =  (input.nextInt());
-                    System.out.println("Enter the foillowing parameter\n" + 
+                    System.out.println("Enter the following parameter\n" + 
                                     " <email_address>");
                     email =  verInput(input.nextLine());
-                    System.out.println("Enter the foillowing parameter\n" + 
+                    System.out.println("Enter the following parameter\n" + 
                                     " <phone_number>");
                     phoneNumber =  input.nextInt();  
                     Contact newC = new Contact(name,zipCode,email,phoneNumber);
-                    contactList.add(newC);
+                    temp.contactList.add(newC);
                 break;
 
                 case "DELETE":
                     System.out.println("Enter your password to proceed");
-                    in = input.nextLine(); //should be passwrds entry
+                    in = input.nextLine(); //should be passwords entry
                     //verPassword, if true process, else throw mismatch error
 
                     System.out.println("Enter the foillowing parameter\n" + 
                     "<name>");
                     name =  verInput(input.nextLine());
-                    delete(name);
+                    temp.delete(name);
                     break;
                 
                 case "GET":
                     System.out.println("Enter the foillowing parameter\n" + 
                     "<name>");
                     name =  verInput(input.nextLine());
-                    get(name);
+                    temp.get(name);
                     break;
                 
                 case "SET":
@@ -155,25 +160,25 @@ public void get(String name){
                     in = input.nextLine(); //should be passwrds entry
                       //verPassword, if true process, else throw mismatch error
 
-                    System.out.println("Enter the foillowing parameter\n" + 
+                    System.out.println("Enter the following parameter\n" + 
                                     " <name>");
                     name =  verInput(input.nextLine());
-                    System.out.println("Enter the foillowing parameter\n" + 
+                    System.out.println("Enter the following parameter\n" + 
                                     " <zip_code>");
                     zipCode =  input.nextInt();
-                    System.out.println("Enter the foillowing parameter\n" + 
+                    System.out.println("Enter the following parameter\n" + 
                                     " <email_address>");
                     email =  verInput(input.nextLine());  
-                    System.out.println("Enter the foillowing parameter\n" + 
+                    System.out.println("Enter the following parameter\n" + 
                                     " <phone_number>");
                     phoneNumber =  input.nextInt();     
-                    set(name,zipCode,email,phoneNumber);
+                    temp.set(name,zipCode,email,phoneNumber);
 
                 default:
                     break;
                 }
                 
-                System.out.println("Do you wish to run again, enter yes or no");
+                System.out.println("Do you want to do something else?, enter yes or no");
                 in = input.nextLine();
                 if(in.equalsIgnoreCase("yes")){runAgian = true; break;}
                 else{ runAgian = false; break;}
@@ -184,7 +189,7 @@ public void get(String name){
             }
           }while(runAgian == true);
           input.close();
-          System.exit(0);
+         return temp;
             
 
     }
