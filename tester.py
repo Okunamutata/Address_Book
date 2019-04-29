@@ -1,3 +1,6 @@
+#    # -*- coding: utf-8 -*-
+# uncomment this line if running on linux
+
 import random
 
 data = [
@@ -512,7 +515,7 @@ while(door):
   print(random.choice(data))
   print("Passwords:")
   print(random.choice(data))
-  answer = input("Continue? (y/n)\n")
+  answer = input("Continue? (y/n)\n")  #change input to raw_input if not python 3.0
   if answer == "y":
       door = True
   else:
