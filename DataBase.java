@@ -8,8 +8,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class DataBase {
- 
-
     public void serializeAddress(AddressBook contacts, String uId) {
         String filename = uId;
 		FileOutputStream fout = null;
@@ -19,17 +17,13 @@ public class DataBase {
             File f = new File(filename + ".ser");
             if(!f.exists()){
                 f.createNewFile();
-              }else{
-                
-              
-
-			fout = new FileOutputStream(f);
+              }
+	    else{
+	    fout = new FileOutputStream(f);
             oos = new ObjectOutputStream(fout);
             for(int i  = 0; i < contacts.contactList.size(); i++ ){
                 oos.writeObject(contacts.contactList.get(i));
             }
-			
-
 			System.out.println("Done");
             }
 		} catch (Exception ex) {
@@ -96,15 +90,12 @@ public class DataBase {
                     }
                 }
 			
-
 		} catch (Exception ex) {
             //ex.printStackTrace();
             System.out.println("Something went wrong!");
 
 		}
-
 		return user;
-
 	}
     
 
@@ -150,14 +141,10 @@ public class DataBase {
 				} catch (IOException e) {
                     //e.printStackTrace();
                     System.out.println("Something went wrong!");
-
 				}
 			}
-
 		}
-
 		return contacts;
-
 	}
 
 
