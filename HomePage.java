@@ -14,7 +14,6 @@ public class HomePage {
 		 AddressBook newAddress;
 		 Scanner cScanner = new Scanner(System.in);
 		 
-		 
 		 do
 		 {
 		 System.out.println("*******************************\n" +
@@ -27,6 +26,7 @@ public class HomePage {
 		 input = cScanner.nextInt();
 		 switch(input)
 		 {
+		// REVISE TO REFLECT SPECIFICATIONS IN A SINGLE LINE WHEN CREATING NEW ACCOUNT
 		 case 1:
 			 System.out.println("Please enter your new iD:");
 			 iD= cScanner.next();
@@ -44,7 +44,7 @@ public class HomePage {
 			 }
 			 else
 			 {
-				 System.out.println("Please try again something is Wrong!!");
+				 System.out.println("Please try again. User input is invalid!");
 			 }
 		 break;
 		 
