@@ -2,6 +2,7 @@
 # uncomment this line if running on linux
 
 import random
+import string
 
 data = [
   "",
