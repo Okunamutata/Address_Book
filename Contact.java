@@ -1,10 +1,13 @@
-public class Contact {
+import java.io.Serializable;
+public class Contact  implements Serializable  {
 	protected String name;
-	protected int zipCode;
+	protected String zipCode;
 	protected String email;
-	protected int phoneNumber;
+	protected String phoneNumber;
 	
-	public Contact(String name, int zipCode, String email, int phoneNumber) {
+	private static final long serialVersionUID = 1L;
+
+	public Contact(String name, String zipCode, String email, String phoneNumber) {
 		super();
 		this.name = name;
 		this.zipCode = zipCode;
@@ -16,7 +19,7 @@ public class Contact {
 		return name;
 	}
 
-	protected int getZipCode() {
+	protected String getZipCode() {
 		return zipCode;
 	}
 
@@ -24,7 +27,7 @@ public class Contact {
 		return email;
 	}
 
-	protected int getPhoneNumber() {
+	protected String getPhoneNumber() {
 		return phoneNumber;
 	}
 
@@ -32,7 +35,7 @@ public class Contact {
 		this.name = name;
 	}
 
-	protected void setZipCode(int zipCode) {
+	protected void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
 
@@ -40,7 +43,7 @@ public class Contact {
 		this.email = email;
 	}
 
-	protected void setPhoneNumber(int phoneNumber) {
+	protected void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
@@ -50,8 +53,8 @@ public class Contact {
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + phoneNumber;
-		result = prime * result + zipCode;
+		result = prime * ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
+		result = prime * ((zipCode == null) ? 0 : zipCode.hashCode());
 		return result;
 	}
 
