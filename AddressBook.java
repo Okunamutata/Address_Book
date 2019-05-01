@@ -6,7 +6,6 @@ public class AddressBook {
     protected ArrayList<Contact> contactList;
     public AddressBook(){
         contactList = new ArrayList<>();
-
     }
 
 public void add(String name, int zipCode, String email, int phoneNumber ){
@@ -14,7 +13,7 @@ public void add(String name, int zipCode, String email, int phoneNumber ){
     contactList.add(newCon);
 }
 
-public  void delete(String name ){
+public void delete(String name){
     for(Contact e : contactList){
         if(e.name == name){
             contactList.remove(e);
@@ -25,7 +24,7 @@ public  void delete(String name ){
     }
    
 }
-
+	
 public void set( String name, int zipCode, String email, int phoneNumber )
 {
     for(Contact e : contactList)
@@ -105,7 +104,7 @@ public void get(String name)
 	 String email;
 	 int phoneNumber;
 	 AddressBook temp = userBook;
-        Boolean runAgian = true;
+        Boolean runAgain = true;
         String in = null;
         Scanner input = new Scanner(System.in);// remember to close scanner
         System.out.println("*******************************\n" +
@@ -177,17 +176,16 @@ public void get(String name)
                 default:
                     break;
                 }
-                
-                System.out.println("Do you want to do something else?, enter yes or no");
+                System.out.println("Do you want to do something else?, Enter yes or no.");
                 in = input.nextLine();
-                if(in.equalsIgnoreCase("yes")){runAgian = true; break;}
-                else{ runAgian = false; break;}
+                if(in.equalsIgnoreCase("yes")){runAgain = true; break;}
+                else{ runAgain = false; break;}
             }            
             catch (Exception e) {
-                System.out.println("incorrect input");
+                System.out.println("Incorrect input.");
                 break;
             }
-          }while(runAgian == true);
+          }while(runAgain == true);
           input.close();
          return temp;
             
