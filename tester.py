@@ -1,4 +1,4 @@
-#    # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 # uncomment this line if running on linux
 
 import random
@@ -509,14 +509,25 @@ data = [
   "జ్ఞ‌ా"
 ]
 
+def randomString(stringLength):
+    """Generate a random string of fixed length """
+    letters = random.choice(data) + random.choice(data) + random.choice(data) + random.choice(data) + random.choice(data)
+    return ''.join(random.choice(letters) for i in range(stringLength))
+
 door = True
+door2 = True
 while(door):
-  print("User Name:")
-  print(random.choice(data))
-  print("Passwords:")
-  print(random.choice(data))
-  answer = input("Continue? (y/n)\n")  #change input to raw_input if not python 3.0
+  num = int(raw_input("Range of Input:"))
+  door2 = True
+  while(door2):
+    print(randomString(num))
+    answer = raw_input("Continue? (y/n)\n")
+    if answer == "y":
+        door2 = True
+    else:
+        door2 = False
+  answer = raw_input("Quit? (y/n)\n")
   if answer == "y":
-      door = True
+     door = False
   else:
-      door = False
+     door = True
