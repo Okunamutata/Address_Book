@@ -75,11 +75,11 @@ import java.util.Scanner;
                             "Welcome to your Address Book\n" + 
        
                             "****************************");
-
+                            if(f.exists()){
+                                temp = db.deserialzeAddress(uID);
+                            }
         do{
-            if(f.exists()){
-                temp = db.deserialzeAddress(uID);
-            }
+            
         try {
             System.out.println("PLease input operation in the following format\n" + 
                                 " command    parameter");
@@ -114,7 +114,8 @@ import java.util.Scanner;
                     email =  comds[3];
                     phoneNumber = comds[4];    
                     temp.set(name,zipCode,email,phoneNumber);
-
+                case "LOGOUT":
+                    
                 default:
                     break;
                 }
