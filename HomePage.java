@@ -53,24 +53,23 @@ public class HomePage {
 			 // here call the addressBook class with their unique id
 			 String password,userID;
 			 System.out.println("*******************************\n" +
-          						"LOG IN PAGE\n" + 
+          						"\tLOG IN PAGE\n" + 
 
           						"*******************************");
 			 
-			 System.out.println("Please enter your iD \n");
-			 userID = cScanner.next();
-			 System.out.println("Please enter your password \n");
-			 password = cScanner.next();
+			 System.out.println("Please enter your iD \n"); 
+			 userID = cScanner.next(); 
+			 System.out.println("Please enter your password \n"); 
+			 password = cScanner.next(); 
 
-			 for(int i =0; i < signedUpAccs.size(); i++){
-				NewAccount temp = (NewAccount) signedUpAccs.get(i);
+			 for(int i =0; i < signedUpAccs.size(); i++){ 
+				NewAccount temp = (NewAccount) signedUpAccs.get(i); 
 				if(temp.iD == userID){
-					db.deserialzeUser_Pass(signedUpAccs, userID);
+					db.deserialzeUser_Pass(signedUpAccs, userID); 
 				}
 			}
 			loggedIn = true;
-			 
-			
+			 		
 				 for (int i = 0; i < signedUpAccs.size(); i++)
 				 
 				{
@@ -87,13 +86,10 @@ public class HomePage {
 							System.out.println("Account not found! ");
 						}
 						// runAB should return the new addressBook edited then sets the addressBook object in the user object
-				}
-			 
-			 
+				}	 
 		 break;
 		 default: 
 		 	break;
-
 			}
 			}catch (Exception e) {
                 System.out.println("incorrect input");
@@ -104,5 +100,4 @@ public class HomePage {
 		 }while(input >= 1 && input <= 2);
 		 System.exit(0);
 	}
-
 }
