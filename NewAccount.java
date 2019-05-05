@@ -1,23 +1,24 @@
+import java.util.ArrayList;
 
 public class NewAccount {
 	protected String iD;
 	protected String password;
-	protected AddressBook contacts;
+	protected ArrayList<Contact> contacts;
 	
 	public NewAccount(String iD, String password) {
 		super();
 		this.iD = iD;
 		this.password = password;
-		this.contacts = new AddressBook();;
+		this.contacts = new ArrayList<Contact>();;
 	}
 	
 
-	protected AddressBook getContacts() {
+	protected ArrayList<Contact> getContacts() {
 		return contacts;
 	}
 
 
-	protected void setContacts(AddressBook contacts) {
+	protected void setContacts(ArrayList<Contact> contacts) {
 		this.contacts = contacts;
 	}
 

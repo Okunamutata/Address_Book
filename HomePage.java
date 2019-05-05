@@ -4,118 +4,234 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class HomePage {
-	public static void main(String[] args) {
+
+    
+	public static void add(String name, String zipCode, String email, String phoneNumber ,ArrayList<Contact> userContacts)
+	{
+	    Contact newCon = new Contact(name, zipCode, email, phoneNumber);
+	    userContacts.add(newCon);
+	}
+	
+	public static void delete(String name, ArrayList<Contact> userContacts )
+	{
+	    for(Contact e : userContacts){
+	        if(e.name == name){
+	        	userContacts.remove(e);
+	        }
+	        else{
+	            System.out.println("Contact not found");
+	        }
+	    }
+	   
+	}
+	
+	public static void set( String name, String zipCode, String email, String phoneNumber , ArrayList<Contact> userContacts)
+	{
+	    for(Contact e : userContacts)
+	    {
+	        if(e.name == name) 
+	        {
+	            e.setName(name); 
+	            e.setZipCode(zipCode);  
+	            e.setEmail(email);
+	            e.setEmail(email);      
+	        }
+	        else{
+	            System.out.println("Contact not found");
+	        }
+	    }
+	}
+	
+	public static void get(String name,  ArrayList<Contact> userContacts) // another par arrayList and then get the items inside!!
+	{
+	    for(Contact e : userContacts){
+	        if(e.name == name)
+	        {
+	        	e.toString();
+	        }
+	        else
+	        {
+	            System.out.println("Contact not found");
+	        }
+	    }
+	}
+    // WHY WE NEED THEM TO BE STATIC ??
+    public static ArrayList<Contact> runAB(ArrayList<Contact> userContacts, String uID){
+
+     String tempStr = null;
+     String name;
+	 String zipCode;
+	 String email;
+	 String phoneNumber;
+	 ArrayList<Contact> temp = userContacts; // user contacts that is passed when logged in (the current contact list that the user have)
+        Boolean runAgain = true; // keeps looping until LOGOUT
+        String in = null;
+        Scanner input = new Scanner(System.in);
+       
+                           
+        do{ // LOGED IN loop
+            
+	        try // we might not need try unless the data base requires it
+	        {
+	            
+	            in = input.next(); // command input
+	            String[] comds = in.split("\\s"); 
+	            tempStr = comds[0];
+	            switch (tempStr)  			// ADD LIST COMMAND ! List command lists all the entries of the contacts list
+	            { 
+	                case "ADD": // when need to check if name is exist or not in !!
+	                    name =  comds[1]; 
+	                    zipCode =  comds[2];
+	                    email =  comds[3];
+	                    phoneNumber =  comds[4];  
+	                    add(name,zipCode,email,phoneNumber,temp);
+	                    System.out.println("New contact is Added!");
+	                break;
+	
+	                case "DELETE": 
+	                    name =  comds[1];
+	                    delete(name, temp); 
+	                    break;
+	                
+	                case "GET":
+	                    name =  comds[1];
+	                    get(name , temp);
+	                    break;
+	                
+	                case "SET":
+	                    name =  comds[1];
+	                    zipCode =  comds[2];
+	                    email =  comds[3];
+	                    phoneNumber = comds[4];    
+	                    set(name,zipCode,email,phoneNumber,temp);
+	                case "LOGOUT":
+	                	runAgain = false;
+	                    break;
+	                default:
+	                	if(tempStr == "LOGIN")
+	                	{
+	                		System.out.println("You are already logged in. If you want to login in a different account please LOGOUT.");
+	                	}
+	                	System.out.println("Please enter a valid command");
+	                    break;
+	            }
+	               // db.serializeAddress(temp, uID);// save to a file under the name of user
+	               
+	         }            
+	         catch (Exception e)
+	         {
+	                System.out.println("Exception: something is wrong!");
+	
+	         }
+            
+          }while(!runAgain); // it loops until LOGOUT
+        
+         return temp; // returns a new contacts list to set the old contact list in the NewAccount object to a new edited contacts list
+      
+    }
+	public static void main(String[] args) 
+	{
 		String tempStr = null;
-		boolean loggedIn;
 		String input;
 		ArrayList<NewAccount> signedUpAccs = new ArrayList<>(); // the list of accounts
 		String iD, pass1, pass2;
 		NewAccount newAcc;
 		AddressBook newAddress;
 		Scanner cScanner = new Scanner(System.in);
-		DataBase db = new DataBase();
-		do {
-			try{
-			System.out.println("*******************************\n" + "Welcome to the Address Book\n" +
-
-					"*******************************");
-
-			System.out.println("If you want to sign up enter (1)\n" + "If you want to log in enter (2)\n");
-			input = cScanner.next();
-			//in = input.next(); // command input
-			String[] comds = input.split("\\s");
-			tempStr = comds[0];
-			
-			switch (tempStr) {
-			// REVISE TO REFLECT SPECIFICATIONS IN A SINGLE LINE WHEN CREATING NEW ACCOUNT
-			
-			case "NEWUSER":
-			
-				//System.out.println("Please enter your new iD:");
-				iD = comds[1];
-				//System.out.println("Please enter your new password: (Has to be more than 8 characters)");
-				pass1 = comds[2];
-				//System.out.println("Please confirm your new password: ");
-				pass2 = comds[3];
-
-				if (pass1.equals(pass2) && pass1.length() >= 8 && pass1.length() <= 30 && iD.length() <= 30) {
-					newAcc = new NewAccount(iD, pass1); // create a new account
-					signedUpAccs.add(newAcc);
-					System.out.println("Account is created! ");
-					db.serializeUser_Pass(signedUpAccs);
-
-			 }
-			 else
-			 {
-				 System.out.println("Please try again. User input is invalid!");
-				 break;
-			 }
-		 break;
-		 
-		 
-		 case "LOGIN": 
-			// This a log In page
-			 // ask for their id & pass and then look up the accounts in data base if existed 
-			 // check if user existed 
-			 // every user have only access to their addrdess book which they can edit delete add 
-			 // here call the addressBook class with their unique id
-			 String password,userID;
-			
-			 //System.out.println("Please enter your iD \n");
-			 userID = comds[1];
-			 //System.out.println("Please enter your password \n");
-			 password = comds[2];
-			
-			
-				NewAccount temp = db.deserialzeUser_Pass(signedUpAccs, userID);
+		NewAccount temp = null;
+		
+		do { // The loop (the program) keeps running without termination 
+			try
+			{
 				
-			
-			loggedIn = true;
-			 
-			
-				 for (int i = 0; i < signedUpAccs.size(); i++)
-				 
+				input = cScanner.next();
+				String[] comds = input.split("\\s");
+				tempStr = comds[0];
+				
+				switch (tempStr) 
 				{
-					 
-						if((temp.getPassword().equals(password) )&& (temp.getiD().equals(userID)) )
+				
+					case "NEWUSER":
+						iD = comds[1];
+						pass1 = comds[2];
+						pass2 = comds[3];
+	
+						if (pass1.equals(pass2) && pass1.length() >= 8 && pass1.length() <= 30 && iD.length() <= 30) 
 						{
-							
-							
-							temp.setContacts(runAB(temp.getContacts(), temp.getiD()));
-							
+							newAcc = new NewAccount(iD, pass1); // create a new account
+							signedUpAccs.add(newAcc);
+							System.out.println("Account is created! ");
+							//db.serializeUser_Pass(signedUpAccs);
+		
 						}
 						else
 						{
-							System.out.println("Account not found! ");
+						 System.out.println("Please try again. User input is invalid!");
+						 break;
 						}
-						// runAB should return the new addressBook edited then sets the addressBook object in the user object
-				}
-			 			break;
-		 default: 
-
-				if(tempStr.equalsIgnoreCase("ADD") || 
-					tempStr.equalsIgnoreCase("DEL") || 
-					 tempStr.equalsIgnoreCase("GET") ||  
-					 tempStr.equalsIgnoreCase("LIST"))
-				{
-						System.out.println("Please log in or create a new ID to use the entered command.");
-
-				}
-				else
-				{
-					System.out.println("Please enter a valid command.");
-				}
-			break;
-
-			}
+					break;
+			 
+			 
+					case "LOGIN": 
+						String password,userID;
+						userID = comds[1];
+						password = comds[2];
+						
+						for(int i = 0 ; i< signedUpAccs.size() ; i++) // This loop loops through list and check if the id match, holds the Acc in temp
+						
+						{
+							
+							if(userID == signedUpAccs.get(i).getiD())
+								temp = signedUpAccs.get(i);
+						}
+						for (int i = 0; i < signedUpAccs.size(); i++) // This loop checks if the account info entered is correct or not
+						 
+						{
+							 
+								if((temp.getPassword().equals(password) )&& (temp.getiD().equals(userID)) || temp == null)
+								{
+									
+									// I'm not sure if we are setting the contacts in the actual ArrayList signedUpAccounts or we
+									// just setting an object we copied from the signedUpAccount
+									// if we are not changing the actual object in signedUpAccount list then all the modification below doesn't matter!
+									
+									temp.setContacts(runAB(temp.getContacts(), temp.getiD())); // if inside here means account is logged in
+									System.out.println("You Loged out!");
+								}
+								else
+								{
+									System.out.println("Account or Password is wrong! ");
+								}
+								// runAB should return the new addressBook edited then sets the addressBook object in the user object
+						}
+				 		break;
+					default: 
+	
+						if(tempStr.equals("ADD") || 
+							tempStr.equals("DEL") || 
+							 tempStr.equals("GET") ||  
+							 tempStr.equals("LIST"))
+						{
+								System.out.println("Please log in or create a new ID to use the entered command.");
+		
+						}
+						else
+						{
+							System.out.println("Please enter a valid command.");
+						}
+						break;
+	
+				} //switch
+			}	// try
 			catch (Exception e)
-			 	{
+			{
                 System.out.println("incorrect input");
-                //runAgian = true;
                 break;
-            	}
-	 		}
-		 }while(is);
+            }
+	 		
+			
+		}while(true);
+		
 		 System.exit(0);
 	}
 
