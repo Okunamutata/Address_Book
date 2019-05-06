@@ -1,36 +1,52 @@
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
-public class DataBase {
-    public void serializeAddress(AddressBook contacts, String uId) {
-        String filename = uId;
+import java.io.*;
+public class DataBase implements java.io.Serializable {
+    private static final long serialversionUID = 
+                                 129348938L; 
+    public void serializeAddress(AddressBook ab, String user) {
+        String filename = user;
 		FileOutputStream fout = null;
 		ObjectOutputStream oos = null;
 
 		try {
             File f = new File(filename + ".ser");
-            if(!f.exists()){
-                f.createNewFile();
-              }else{
+            boolean ifOpen = f.createNewFile(); 
+            if(ifOpen == false){
+                System.out.println("Storage file opened");
+            }
+            else{
+                System.out.println("New Storgae file created");
+            }
+
+            //nuber of contacts
+             int size = ab.contactList.size();
+
 			fout = new FileOutputStream(f);
             oos = new ObjectOutputStream(fout);
-            for(int i  = 0; i < contacts.contactList.size(); i++ ){
-                oos.writeObject(contacts.contactList.get(i));
+            //write the nuber of obejects being saved
+            oos.writeObject(size);
+            //save all of the contacts
+            for(int i = 0; i < size; i++){
+                oos.writeObject(ab.contactList.get(i));
             }
-			System.out.println("Done");
-            }
-		} catch (Exception ex) {
+            
+			System.out.println("Updated Contacts");
+            
+		} catch (IOException e){
+            System.out.println("Storage file not found or created"); 
+        }catch (Exception ex) {
 
             //ex.printStackTrace();
             System.out.println("Something went wrong!");
 
-		} finally {
+       
+        } finally {
 
 			if (fout != null) {
 				try {
@@ -53,17 +69,25 @@ public class DataBase {
 		}
 	}
 
-	public void serializeUser_Pass(ArrayList signed) {
-        File uf = new File("user.ser");
-
+	public void serializeUser_Pass(NewAccount user) {
+        File uf = new File( user.iD + "Acc.ser");
+        FileOutputStream fout = null;
+        ObjectOutputStream oos = null;
 		try{ 
-            uf.createNewFile();
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(uf, false)); 
-            for(int i  = 0; i < signed.size(); i++ ){
-                        oos.writeObject(signed.get(i));
+            boolean ifOpen = uf.createNewFile(); 
+            if(ifOpen == false){
+                System.out.println("Storage file opened");
             }
-			System.out.println("Done");
+            else{
+                System.out.println("New Storgae file created");
+            }
+            fout = new FileOutputStream(uf);
+            oos = new ObjectOutputStream(fout);
+             oos.writeObject(user);
+            
+			System.out.println("Saved user account");
             oos.close();
+            fout.close();
 		} catch (Exception ex) {
             //ex.printStackTrace();
             System.out.println("Something went wrong");
@@ -71,51 +95,98 @@ public class DataBase {
 
     }
 
-    public NewAccount deserialzeUser_Pass(ArrayList userList, String username) {
-
+    public ArrayList<Contact> deserialzeUser_Pass(String username) {
+        FileInputStream  fout = null;
+		ObjectInputStream ois = null;
 		NewAccount user = null;
-        File uf = new File("user.ser");
+        File uf = new File(username +"Acc.ser");
 
 		try{ 
-            //uf.createNewFile();
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(uf)); 
-                while(ois != null){
-                    userList.add((NewAccount) ois.readObject());
-                }
-                for(int i =0; i < userList.size(); i++){
-                    NewAccount temp = (NewAccount) userList.get(i);
-                    if(temp.iD == username){ 
-                        return temp;
-                    }
-                }
-			
-		} catch (Exception ex) {
-            //ex.printStackTrace();
+            
+            fout = new FileInputStream(uf);
+            ois = new ObjectInputStream(fout);
+        
+            user = (NewAccount) ois.readObject();
+            System.out.println(user.toString());
+            System.out.println("USER IS LOGGED IN");
+			ois.close();
+       
+
+        }catch (FileNotFoundException ex) {
+          
+            System.out.println("User Account not found!");
+        }catch (IOException ex) {
+          
+            System.out.println("Object being passed in is not a file!");
+        }
+         catch (Exception ex) {
+          
             System.out.println("Something went wrong!");
 
-		}
+        }
+        if (fout != null) {
+            try {
+                fout.close();
+            } catch (IOException e) {
+                //e.printStackTrace();
+                System.out.println("Something went wrong!");
+            }
+        }
+
+        if (ois != null) {
+            try {
+                ois.close();
+            } catch (IOException e) {
+                //e.printStackTrace();
+                System.out.println("Something went wrong!");
+            }
+        }
 		return user;
 	}
     
 
 
-	public AddressBook deserialzeAddress(String uId) {
-        String filename = uId;
-		AddressBook contacts = null;
+	public ArrayList <Contact> deserialzeAddress(String user) {
+        String filename = user;
+		ArrayList<Contact> contacts = new AddressBook();;
 
-		FileInputStream fin = null;
+		FileInputStream fout = null;
 		ObjectInputStream ois = null;
 
 		try {
             File f = new File(filename + ".ser");
+            boolean ifOpen = f.createNewFile(); 
+            if(ifOpen == false){
+                System.out.println("Storage file opened");
+            }
+            else{
+                System.out.println("New Storgae file created");
+            }
+
             if(f.exists()){
               
 
-			fin = new FileInputStream(f);
-            ois = new ObjectInputStream(fin);
-            while(fin != null){
-                contacts.contactList.add((Contact) ois.readObject());
+			fout = new FileInputStream(f);
+            ois = new ObjectInputStream(fout);
+            int size = (int) ois.readObject();
+        
+            while(ois.readObject() != null){
+                for(int i = 0; i < size; i++){
+                    Contact temp = (Contact) ois.readObject();
+    
+                    contacts.add(temp.name, temp.zipCode, temp.email, temp.phoneNumber);
+                }
+                
             }
+            if (fout != null) {
+				try {
+					fout.close();
+				} catch (IOException e) {
+                    e.printStackTrace();
+                    //System.out.println("Something went wrong!");
+
+				}
+			}
         }else{ System.out.println("No Records found");} 
 			
 		} catch (Exception ex) {
@@ -124,9 +195,9 @@ public class DataBase {
 
 		} finally {
 
-			if (fin != null) {
+			if (fout != null) {
 				try {
-					fin.close();
+					fout.close();
 				} catch (IOException e) {
                     e.printStackTrace();
                     //System.out.println("Something went wrong!");
@@ -147,7 +218,4 @@ public class DataBase {
 		return contacts;
 	}
 
-    public static void main(String[] args){
-	    
-    }
 }

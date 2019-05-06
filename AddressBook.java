@@ -114,6 +114,7 @@ import java.util.Scanner;
                     email =  comds[3];
                     phoneNumber = comds[4];    
                     temp.set(name,zipCode,email,phoneNumber);
+	            break;
                 case "LOGOUT":
                     
                 default:
