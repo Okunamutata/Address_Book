@@ -21,8 +21,7 @@ public class HomePage {
 	        else{
 	            System.out.println("Contact not found");
 	        }
-	    }
-	   
+	    }   
 	}
 	
 	public static void set( String name, String zipCode, String email, String phoneNumber , ArrayList<Contact> userContacts)
@@ -80,7 +79,7 @@ public class HomePage {
 }       
 
                            
-        do{ // LOGED IN loop
+        do{ // LOGGED IN loop
             
 	        try // we might not need try unless the data base requires it
 	        {
@@ -98,7 +97,7 @@ public class HomePage {
 			    System.out.println("test 2");				
 	                    add(name,zipCode,email,phoneNumber, userContacts);
 						System.out.println("test 3");				
-	                    System.out.println("New contact is Added!");
+	                    System.out.println("New contact is added!");
 	                break;
 	
 	                case "DELETE": 
