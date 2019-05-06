@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class HomePage  implements java.io.Serializable{
 	private static final long serialversionUID = 
 	129348938L; 
-    static ArrayList<NewAccount> signedUpAccs = new ArrayList(); 
+    static ArrayList<NewAccount> signedUpAccs = new ArrayList<>(); 
 	public static void add(String name, String zipCode, String email, String phoneNumber ,ArrayList<Contact> userContacts)
 	{
 	    Contact newCon = new Contact(name, zipCode, email, phoneNumber);
@@ -72,7 +72,7 @@ public class HomePage  implements java.io.Serializable{
         String in = null;
         Scanner input = new Scanner(System.in);
        
-                           
+          System.out.println("You logged in!");                 
         do{ // LOGED IN loop
             
 	        try // we might not need try unless the data base requires it
@@ -109,7 +109,7 @@ public class HomePage  implements java.io.Serializable{
 	                    email =  comds[3];
 	                    phoneNumber = comds[4];    
 	                    set(name,zipCode,email,phoneNumber,temp);
-				break;
+						break;
 				case "LIST":
 					for(Contact e : temp){
 						String tname = e.name;
@@ -121,7 +121,7 @@ public class HomePage  implements java.io.Serializable{
 				
 					break;
 					case "LOGOUT":
-						db.serializeAddress(temp, uID);
+						
 						System.out.println("Logging out, all previos operations have been saved. ");
 	                	runAgain = false;
 	                    break;
@@ -218,7 +218,8 @@ public class HomePage  implements java.io.Serializable{
 									// just setting an object we copied from the signedUpAccount
 									// if we are not changing the actual object in signedUpAccount list then all the modification below doesn't matter!
 									
-									temp.setContacts(runAB(db.deserialzeAddress(temp.iD), temp.getiD())); // if inside here means account is logged in
+									temp.setContacts(runAB(db.deserialzeAddress(temp.getiD()), temp.getiD())); // if inside here means account is logged in
+
 									//System.out.println("You Loged out!");
 								}
 								else

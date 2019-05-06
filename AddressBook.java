@@ -3,10 +3,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-	public class AddressBook {
+	public class AddressBook implements java.io.Serializable{
+        private static final long serialversionUID = 
+                                 129348938L; 
 	    protected ArrayList<Contact> contactList;
 	    public AddressBook(){
-	        contactList = new ArrayList<>();
+            contactList = new ArrayList<>();
+         
 	
 	    }
 	
@@ -43,24 +46,22 @@ import java.util.Scanner;
 	    }
 	}
 	
-	public void get(String name) // another par arrayList and then get the items inside!!
+	public Contact get(String name) // another par arrayList and then get the items inside!!
 	{
 	    for(Contact e : contactList){
 	        if(e.name == name)
 	        {
-	            System.out.println("Contact name: " + e.name + "\n"+
-	                                "Zip Code: " + e.zipCode + "\n"+ 
-	                                "Email: "   + e.email + "\n"+
-	                                "Phone Number: " + e.phoneNumber);           //contactList.remove(e);
+	           return e;           //contactList.remove(e);
 	        }
 	        else{
 	            System.out.println("Contact not found");
 	        }
 	    }
+        return null;
 	}
     
     public AddressBook runAB(AddressBook userBook, String uID){
-    File f = new File(uID + ".ser");
+    File userData = new File(uID + ".ser");
      DataBase db = new DataBase();
      String tempStr = null;
      String name;
@@ -71,29 +72,21 @@ import java.util.Scanner;
         Boolean runAgian = true;
         String in = null;
         Scanner input = new Scanner(System.in);// remember to close scanner
-        System.out.println("*******************************\n" +
-                            "Welcome to your Address Book\n" + 
-       
-                            "****************************");
-                            if(f.exists()){
-                                temp = db.deserialzeAddress(uID);
-                            }
-        do{
-            
+    
+    
+    do{
         try {
-            System.out.println("PLease input operation in the following format\n" + 
-                                " command    parameter");
-            System.out.println("Enter the operation you wish to run\n" + 
-                                " ADD, DELETE, GET");
-            in = input.next(); // command input
-            String[] comds = in.split("\\s");
+            in = input.nextLine(); // command input
+            String[] comds = in.split(" ");
             tempStr = comds[0];
             switch (tempStr) {
                 case "ADD": 
+                System.out.println(comds[0] + comds[1] + comds[2]);
                     name =  comds[1]; //name
                     zipCode =  comds[2];//zipcode
                     email =  comds[3];//email
                     phoneNumber =  comds[4];  //phone
+
                     Contact newC = new Contact(name,zipCode,email,phoneNumber);
                     temp.contactList.add(newC);
                 break;
@@ -104,8 +97,20 @@ import java.util.Scanner;
                     break;
                 
                 case "GET":
+                temp = db.deserialzeAddress(uID);
+                    Contact tempC = null;
                     name =  comds[1];
-                    temp.get(name);
+                    for(int i =0; i <  temp.contactList.size(); i++){
+                        if(temp.contactList.get(i).name == name){
+                             tempC = userBook.contactList.get(i);
+                        }
+                    }
+                    
+                    System.out.println(tempC.name  +
+                                        tempC.zipCode +
+                                        tempC.email  +
+                                        tempC.phoneNumber);
+                    
                     break;
                 
                 case "SET":
@@ -115,26 +120,23 @@ import java.util.Scanner;
                     phoneNumber = comds[4];    
                     temp.set(name,zipCode,email,phoneNumber);
                 case "LOGOUT":
-                    
+                    break;
                 default:
+                    System.out.println("Please enter a valid command.");
                     break;
                 }
                 db.serializeAddress(temp, uID);// save to a file under the name of user
-                System.out.println("Do you want to do something else?, enter yes or no");
-                in = input.nextLine();
-                if(in.equalsIgnoreCase("yes")){runAgian = true;}
-                else{ runAgian = false; break;}
+                
+                
+            
             }            
             catch (Exception e) {
                 System.out.println("incorrect input");
                 runAgian = true;
-                break;
-            }
-            
-          }while(runAgian == true);
+            }   
           input.close();
          return temp;
-            
+        }while(runAgian == true);      
 
     }
 }
