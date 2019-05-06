@@ -516,19 +516,9 @@ def randomString(stringLength):
     return ''.join(random.choice(letters) for i in range(stringLength))
 
 door = True
-door2 = True
 while(door):
-  num = int(raw_input("Range of Input:"))
-  door2 = True
-  while(door2):
-    print(randomString(num))
-    answer = raw_input("Continue? (y/n)\n")
-    if answer == "y":
-        door2 = True
-    else:
-        door2 = False
-  answer = raw_input("Quit? (y/n)\n")
-  if answer == "y":
-     door = False
-  else:
-     door = True
+  num = random.randint(8,30)
+  temp = randomString(num)
+  print("NEWUSER " + temp + " 12345678 12345678")
+  print("LOGIN " + temp + " 12345678") 
+  print("LOGOUT")
