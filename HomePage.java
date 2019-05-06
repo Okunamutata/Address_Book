@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class HomePage {
 
-    
+   
 	public static void add(String name, String zipCode, String email, String phoneNumber ,ArrayList<Contact> userContacts)
 	{
 	    Contact newCon = new Contact(name, zipCode, email, phoneNumber);
@@ -60,20 +60,17 @@ public class HomePage {
 
      String tempStr = null;
      String name;
-	 String zipCode;
-	 String email;
-	 String phoneNumber;
-	 ArrayList<Contact> temp = userContacts; // user contacts that is passed when logged in (the current contact list that the user have)
-        Boolean runAgain = true; // keeps looping until LOGOUT
-        String in = null;
-        Scanner input = new Scanner(System.in);
-       
-                           
-        do{ // LOGED IN loop
-            
+     String zipCode;
+     String email;
+     String phoneNumber;
+     ArrayList<Contact> temp = userContacts; // user contacts that is passed when logged in (the current contact list that the user have)
+     Boolean runAgain = true; // keeps looping until LOGOUT
+     String in = null;
+     Scanner input = new Scanner(System.in);
+                            
+        do{ // LOGGED IN loop
 	        try // we might not need try unless the data base requires it
-	        {
-	            
+		{    
 	            in = input.next(); // command input
 	            String[] comds = in.split("\\s"); 
 	            tempStr = comds[0];
