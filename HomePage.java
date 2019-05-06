@@ -71,7 +71,7 @@ public class HomePage {
                            
         do{ // LOGED IN loop
             
-	        try // we might not need try unless the data base requires it
+	        try // may not need try unless the data base requires it
 	        {
 	            
 	            in = input.nextLine(); // command input
@@ -85,7 +85,7 @@ public class HomePage {
 	                    email =  comds[3];
 	                    phoneNumber =  comds[4];  
 	                    add(name,zipCode,email,phoneNumber,temp);
-	                    System.out.println("New contact is Added!");
+	                    System.out.println("New contact is added!");
 	                break;
 	
 	                case "DELETE": 
@@ -111,7 +111,7 @@ public class HomePage {
 	                default:
 	                	if(tempStr == "LOGIN")
 	                	{
-	                		System.out.println("You are already logged in. If you want to login in a different account please LOGOUT.");
+	                		System.out.println("You are already logged in. If you want to login in as a different account, please LOGOUT.");.
 	                	}
 	                	System.out.println("Please enter a valid command");
 	                    break;
