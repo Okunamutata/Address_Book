@@ -155,7 +155,6 @@ public class HomePage  implements java.io.Serializable{
 		//ArrayList<NewAccount> signedUpAccs = db.deserialzeUsers(); // the list of accounts
 		String iD, pass1, pass2;
 		NewAccount newAcc;
-		AddressBook newAddress;
 		Scanner cScanner = new Scanner(System.in);
 		NewAccount temp = null;
 		
@@ -217,8 +216,8 @@ public class HomePage  implements java.io.Serializable{
 									// I'm not sure if we are setting the contacts in the actual ArrayList signedUpAccounts or we
 									// just setting an object we copied from the signedUpAccount
 									// if we are not changing the actual object in signedUpAccount list then all the modification below doesn't matter!
-									
-									temp.setContacts(runAB(db.deserialzeAddress(temp.getiD()), temp.getiD())); // if inside here means account is logged in
+									ArrayList<Contact> con = db.deserialzeAddress(temp.getiD());
+									temp.setContacts(runAB(con, temp.getiD())); // if inside here means account is logged in
 
 									//System.out.println("You Loged out!");
 								}

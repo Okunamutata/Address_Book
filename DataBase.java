@@ -189,7 +189,7 @@ public class DataBase implements java.io.Serializable {
 
 		FileInputStream fout = null;
 		ObjectInputStream ois = null;
-
+        int size = 0;
 		try {
             File f = new File(filename + ".ser");
             boolean ifOpen = f.createNewFile(); 
@@ -203,9 +203,14 @@ public class DataBase implements java.io.Serializable {
             if(f.exists()){
               
 
-			//fout = new FileInputStream(f);
-            ois = new ObjectInputStream(new FileInputStream(f));
-            int size = (int) ois.readObject();
+            //fout = new FileInputStream(f);
+            try{
+                ois = new ObjectInputStream(new FileInputStream(f));
+                size = (int)ois.readObject();
+            } catch(EOFException e){
+            }
+            
+            
         
             for(int i = 0; i < size; i++){
                 //for(int j = 0; j < size; i++){
@@ -215,7 +220,7 @@ public class DataBase implements java.io.Serializable {
                 //}
                 
             }
-            ois.close();
+            //ois.close();
             
         }else{ System.out.println("No Records found");} 
 			
