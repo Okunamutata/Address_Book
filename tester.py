@@ -4,6 +4,8 @@
 import random
 import string
 
+from signal import signal, SIGPIPE, SIG_DFL
+signal(SIGPIPE,SIG_DFL) 
 data = [
   "",
   "undefined",
@@ -516,19 +518,15 @@ def randomString(stringLength):
     return ''.join(random.choice(letters) for i in range(stringLength))
 
 door = True
-door2 = True
+minC = 0
+maxC = 100
 while(door):
-  num = int(raw_input("Range of Input:"))
-  door2 = True
-  while(door2):
-    print(randomString(num))
-    answer = raw_input("Continue? (y/n)\n")
-    if answer == "y":
-        door2 = True
-    else:
-        door2 = False
-  answer = raw_input("Quit? (y/n)\n")
-  if answer == "y":
-     door = False
-  else:
-     door = True
+  num = random.randint(minC,maxC)
+  temp = randomString(num)
+  print("NEWUSER " + temp + " 12345678 12345678")
+  print("LOGIN " + temp + " 12345678")
+  temp2 = randomString(num) 
+  print("ADD " + temp2 + " 92110 qwe@gmail.com 6198884444")
+  print("GET " + temp2)
+  print("LIST")
+  print("LOGOUT")
