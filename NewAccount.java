@@ -7,7 +7,6 @@ public class NewAccount implements java.io.Serializable {
 	protected ArrayList<Contact> contacts;
 	
 	public NewAccount(String iD, String password){
-		
 		super();
 		this.iD = iD;
 		this.password = password;
