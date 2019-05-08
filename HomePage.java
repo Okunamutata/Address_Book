@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher; 
+import java.util.regex.Pattern; 
 
 public class HomePage implements java.io.Serializable{
 	private static final long serialversionUID = 
@@ -73,6 +75,19 @@ public class HomePage implements java.io.Serializable{
 		else return false;
 	}
 	
+	
+	public static boolean validEmail(String email) { 
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
+                            "[a-zA-Z0-9_+&*-]+)*@" + 
+                            "(?:[a-zA-Z0-9-]+\\.)+[a-z" + 
+                            "A-Z]{2,7}$"; 
+                              
+        Pattern pat = Pattern.compile(emailRegex); 
+        if (email == null) 
+            return false; 
+        return pat.matcher(email).matches(); 
+       } 
+	
     public static ArrayList<Contact> runAB(ArrayList<Contact> userContacts, String uID){
 
      String tempStr = null;
@@ -102,7 +117,7 @@ public class HomePage implements java.io.Serializable{
 	                    email =  comds[3];
 	                    phoneNumber =  comds[4];  
 			
-		    	    if(zipCode.matches("[0-9][0-9]{4}") && validPhoneNum(phoneNumber)) {
+		    	    if(zipCode.matches("[0-9][0-9]{4}") && validPhoneNum(phoneNumber) && validEmail(email)) {
 	                    	add(name,zipCode,email,phoneNumber,temp);
 	                    	//db.serializeAddress(userContacts, uID);
 	                    	System.out.println("New contact has successfully been added!");
