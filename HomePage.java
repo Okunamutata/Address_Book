@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class HomePage  implements java.io.Serializable{
+public class HomePage implements java.io.Serializable{
 	private static final long serialversionUID = 
 	129348938L; 
     static ArrayList<NewAccount> signedUpAccs = new ArrayList<>(); 
@@ -23,7 +23,6 @@ public class HomePage  implements java.io.Serializable{
 	            System.out.println("Contact not found");
 	        }
 	    }
-	   
 	}
 	
 	public static void set( String name, String zipCode, String email, String phoneNumber , ArrayList<Contact> userContacts)
@@ -73,11 +72,10 @@ public class HomePage  implements java.io.Serializable{
         Scanner input = new Scanner(System.in);
        
           System.out.println("You logged in!");                 
-        do{ // LOGED IN loop
+        do{ // LOGGED IN loop
             
-	        try // we might not need try unless the data base requires it
+	        try // may not need to try unless the data base requires it
 	        {
-	            
 	            in = input.nextLine(); // command input
 	            String[] comds = in.split(" "); 
 	            tempStr = comds[0];
@@ -118,11 +116,10 @@ public class HomePage  implements java.io.Serializable{
 							System.out.println(e.toString());
 						}
 					}
-				
 					break;
 					case "LOGOUT":
 						
-						System.out.println("Logging out, all previos operations have been saved. ");
+						System.out.println("Logging out, all previous operations have been saved. ");
 	                	runAgain = false;
 	                    break;
 	                default:
@@ -181,8 +178,6 @@ public class HomePage  implements java.io.Serializable{
 							System.out.println("Account is created! ");
 							db.serializeUser_Pass(newAcc);//save new user account
 							db.serializeUsers(signedUpAccs);
-						
-							
 						}
 						else
 						{
@@ -219,7 +214,7 @@ public class HomePage  implements java.io.Serializable{
 									ArrayList<Contact> con = db.deserialzeAddress(temp.getiD());
 									temp.setContacts(runAB(con, temp.getiD())); // if inside here means account is logged in
 
-									//System.out.println("You Loged out!");
+									//System.out.println("You logged out!");
 								}
 								else
 								{
