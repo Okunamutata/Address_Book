@@ -56,6 +56,22 @@ public class HomePage implements java.io.Serializable{
 	    }
 	}
 
+       public static boolean validPhoneNum(String phoneNo) {
+		// numbers of format "1234567"
+		if (phoneNo.matches("\\d{7}")) return true;
+		
+		// numbers of format "1234567890"
+		if (phoneNo.matches("\\d{10}")) return true;
+		
+		// numbers with "-" only
+		else if(phoneNo.matches("\\d{3}-\\d{3}-\\d{4}")) return true;
+		
+		// numbers where area code is in braces ()
+		else if(phoneNo.matches("\\(\\d{3}\\)\\d{3}-\\d{4}")) return true;
+	
+		// if nothing matches valid phone number input
+		else return false;
+	}
 	
     // WHY WE NEED THEM TO BE STATIC ??
     public static ArrayList<Contact> runAB(ArrayList<Contact> userContacts, String uID){
@@ -79,25 +95,32 @@ public class HomePage implements java.io.Serializable{
 	            in = input.nextLine(); // command input
 	            String[] comds = in.split(" "); 
 	            tempStr = comds[0];
-	            switch (tempStr)  			// ADD LIST COMMAND ! List command lists all the entries of the contacts list
+	            switch (tempStr)  			
 	            { 
-	                case "ADD": // when need to check if name is exist or not in !!
+	                case "ADD": // must check if name is pre-existing
 	                    name =  comds[1]; 
 	                    zipCode =  comds[2];
 	                    email =  comds[3];
 	                    phoneNumber =  comds[4];  
-						add(name,zipCode,email,phoneNumber,temp);
-						//db.serializeAddress(userContacts, uID);
-	                    System.out.println("New contact is Added!");
+			
+		    	    if(zipCode.matches("[0-9][0-9]{4}") && validPhoneNum(phoneNumber)) {
+	                    	add(name,zipCode,email,phoneNumber,temp);
+	                    	//db.serializeAddress(userContacts, uID);
+	                    	System.out.println("New contact has successfully been added!");
+	                    }
+	                    
+	                    else {
+	                    		System.out.println("Invalid input for adding a contact.");
+	                    }
 	                break;
 	
 	                case "DELETE": 
-	                    name =  comds[1];
+	                    name = comds[1];
 	                    delete(name, temp); 
 	                    break;
 	                
 	                case "GET":
-	                    name =  comds[1];
+	                    name = comds[1];
 	                    get(name, temp);
 	                    break;
 	                
@@ -247,11 +270,8 @@ public class HomePage implements java.io.Serializable{
 			{
                 System.out.println("incorrect input");
                 break;
-            }
-	 		
-			
+            }		
 		}while(true);
-		
 		 System.exit(0);
 	}
 
