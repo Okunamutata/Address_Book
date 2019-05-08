@@ -117,7 +117,7 @@ public class HomePage implements java.io.Serializable{
 	                    email =  comds[3];
 	                    phoneNumber =  comds[4];  
 			
-		    	    if(zipCode.matches("[0-9][0-9]{4}") && validPhoneNum(phoneNumber) && validEmail(email)) {
+		    	    if((name.matches("[a-zA-Z]{20}") || ((name.length() <= 20) && name.matches("[a-zA-Z]+"))) && zipCode.matches("[0-9][0-9]{4}") && validPhoneNum(phoneNumber) && validEmail(email)) {
 	                    	add(name,zipCode,email,phoneNumber,temp);
 	                    	//db.serializeAddress(userContacts, uID);
 	                    	System.out.println("New contact has successfully been added!");
