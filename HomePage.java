@@ -57,13 +57,13 @@ public class HomePage implements java.io.Serializable{
 	}
 
        public static boolean validPhoneNum(String phoneNo) {
-		// numbers of format "1234567"
+		// 7 digit format
 		if (phoneNo.matches("\\d{7}")) return true;
 		
-		// numbers of format "1234567890"
+		// 10 digit format
 		if (phoneNo.matches("\\d{10}")) return true;
 		
-		// numbers with "-" only
+		// numbers containing "-" only
 		else if(phoneNo.matches("\\d{3}-\\d{3}-\\d{4}")) return true;
 		
 		// numbers where area code is in braces ()
@@ -73,7 +73,6 @@ public class HomePage implements java.io.Serializable{
 		else return false;
 	}
 	
-    // WHY WE NEED THEM TO BE STATIC ??
     public static ArrayList<Contact> runAB(ArrayList<Contact> userContacts, String uID){
 
      String tempStr = null;
